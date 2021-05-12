@@ -2,11 +2,19 @@
 const path = require('path') // node 모듈을 import 해오는 기본방법 
 const HtmlPlugin = require('html-webpack-plugin') // webpack plugin 모듈 가져오기 
 const CopyPlugin = require('copy-webpack-plugin')
+const { VueLoaderPlugin } = require('vue-loader')
 
 // export
 module.exports = {
+  resolve: { // 파일 링크 걸을때, js 또는 vue 확장자 기입하지 않아도 되도록 하는 속성
+    extensions: ['.js', '.vue'],
+    alias: { // 경로 별칭 설정 ==> 경로를 별칭으로 지정하여 사용. 
+      '~': path.resolve(__dirname, 'src'),
+      'assets':path.resolve(__dirname, 'src/assets')
+    }
+  },
   // 파일을 읽어들이기 시작하는 진입점 설정 
-  entry: './js/main.js', 
+  entry: './src/main.js',
 
   //결과물(번들)을 반환하는 설정 
   output: {
@@ -22,10 +30,15 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.vue$/,
+        use: 'vue-loader'
+      },
+      {
         test: /\.s?css$/, 
         // .scss 또는.css 확장자를 갖는 파일을 찾는 정규표현식
         // 물음표를 붙이면 있을수도 없을수도 있다는 뜻 ==> s가 있거나 없을 수도 있다. 
         use: [
+          'vue-style-loader',
           'style-loader',
           'css-loader',
           'postcss-loader',
@@ -37,6 +50,10 @@ module.exports = {
         use: [
           'babel-loader'
         ]
+      },
+      {
+        test: /\.(png|jpe?g|gif|webp)$/,
+        use: ['file-loader']
       }
     ] 
   },
@@ -50,7 +67,8 @@ module.exports = {
       patterns: [
         { from: 'static' } // static 폴더 안의 내용이 dist로 복사되어 들어가도록 한다. 
       ]
-    })
+    }),
+    new VueLoaderPlugin()
   ],
 
   devServer: {
