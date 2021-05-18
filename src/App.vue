@@ -1,10 +1,8 @@
 <template>
-  <!-- key와 value가 같으면 key만 적어도 된다. 
-    ex) color: color  ==> color -->
-
-  <h1
-    :style="[fontStyle, backgroundStyle]"
-    @click="changeStyle">
+  <button @click="handler">
+    Click me!!!
+  </button>
+  <h1 v-show="isShow">
     Hello?!
   </h1>
 </template>
@@ -13,20 +11,23 @@
 export default {
   data() {
     return {
-      fontStyle: {
-        color: 'orange',
-        fontSize: '30px'
-      },
-      backgroundStyle: {
-        backgroundColor: 'gray'
-      }
+      isShow: false,
+      count: 0
     }
   },
   methods: {
-    changeStyle() {
-      this.fontStyle.color = 'royalblue'
-      this.fontStyle.fontSize = '100px'
+    handler() {
+      this.isShow = !this.isShow
+      this.count += 1
     }
   }
 }
 </script>
+
+<style>
+  h1, button {
+    font-size: 30px;
+    margin-top: 5%;
+    margin-left: 5%;
+  }
+</style>
