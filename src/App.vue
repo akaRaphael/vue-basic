@@ -2,32 +2,41 @@
   <button @click="handler">
     Click me!!!
   </button>
-  <h1 v-show="isShow">
-    Hello?!
-  </h1>
+  <ul>
+    <li
+      v-for="{id, name} in newFruits"
+      :key="id">
+      {{ id }} = {{ name }}
+    </li>
+  </ul>
 </template>
 
 <script>
+import shortid from 'shortid'
 export default {
   data() {
     return {
-      isShow: false,
-      count: 0
+      fruits: ['Apple', 'Banana', 'Cherry'],
+    }
+  },
+  computed: {
+    newFruits() {
+      return this.fruits.map(fruit => ({
+        id: shortid.generate(), // generate() => shortid를 생성해주는 메소드
+        name: fruit
+      }))
     }
   },
   methods: {
     handler() {
-      this.isShow = !this.isShow
-      this.count += 1
+      this.fruits.push('Orange')
     }
   }
 }
 </script>
 
 <style>
-  h1, button {
-    font-size: 30px;
-    margin-top: 5%;
-    margin-left: 5%;
+  button, li {
+    font-size: 50px;
   }
 </style>
