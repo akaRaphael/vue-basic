@@ -1,18 +1,13 @@
 <template>
-  <button @click="handlerA(), handlerB()">
-    Click me!!!
-  </button>
+  <input type="text" />
 </template>
 
 <script>
 export default {
-  methods: {
-    handlerA() {
-      console.log('handler A!')
-    },
-    handlerB() {
-      console.log('handler B!')
-    },
+  data() {
+    return {
+      
+    }
   }
 }
 </script>
