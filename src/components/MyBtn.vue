@@ -1,23 +1,17 @@
 <template>
-  <div 
-    :class="{ large: large }"
-    :style="{ backgroundColor: color }"
+  <div
     class="btn">
     <slot></slot>
+  </div>
+  <div v-bind="$attrs">
   </div>
 </template>
 
 <script>
 export default {
-  props: {
-    color: {
-      type: String,
-      default: 'gray'
-    },
-    large: {
-      type: Boolean,
-      default: false
-    },
+  inheritAttrs: false,
+  created() {
+    console.log(this.$attrs)
   }
 }
 </script>
@@ -31,9 +25,5 @@ export default {
     background-color: gray;
     color: white;
     cursor: pointer;
-    &.large {
-      font-size: 20px;
-      padding: 10px 20px;
-    }
   }
 </style>
