@@ -3,15 +3,29 @@
     class="btn">
     <slot></slot>
   </div>
-  <div v-bind="$attrs">
-  </div>
-</template>
+  <h1 @dblclick="$emit('keydown', $event.target)">
+    h1태그 입니다.
+  </h1>
+  <input
+    type="text"
+    v-model="msg" />
+</template> 
 
 <script>
 export default {
-  inheritAttrs: false,
-  created() {
-    console.log(this.$attrs)
+  emits: [
+    'keydown',
+    'changeMsg'
+  ],
+  data() {
+    return {
+      msg: ''
+    }
+  },
+  watch: {
+    msg() {
+      this.$emit('changeMsg', this.msg)
+    }
   }
 }
 </script>
