@@ -1,32 +1,12 @@
 <template>
-  <div
-    class="btn">
-    <slot></slot>
+  <div class="btn">
+    <slot name="icon"></slot>
+    <slot name="text"></slot>
   </div>
-  <h1 @dblclick="$emit('keydown', $event.target)">
-    h1태그 입니다.
-  </h1>
-  <input
-    type="text"
-    v-model="msg" />
 </template> 
 
 <script>
 export default {
-  emits: [
-    'keydown',
-    'changeMsg'
-  ],
-  data() {
-    return {
-      msg: ''
-    }
-  },
-  watch: {
-    msg() {
-      this.$emit('changeMsg', this.msg)
-    }
-  }
 }
 </script>
 
