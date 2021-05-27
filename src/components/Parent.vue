@@ -1,13 +1,12 @@
 <template>
-  <Fruits />
+  <Child />
 </template>
 
 <script>
-import Fruits from '~/components/Fruits'
+import Child from '~/components/Child'
 export default {
   components: {
-    Fruits
-  }
-  
+    Child
+  },
 }
 </script>
