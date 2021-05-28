@@ -1,15 +1,23 @@
 <template>
-  <Hello ref="hello" />
+  <MyBtn
+    class="redBtn"
+    style="color:red;"
+    color="#ff0000"
+    @hello="log">
+    Apple
+  </mybtn>
 </template>
 
 <script>
-import Hello from '~/components/Hello'
+import MyBtn from '~/components/MyBtn'
 export default {
   components: {
-    Hello
+    MyBtn
   },
-  mounted() {
-    console.log(this.$refs.hello.$refs.question)
+  methods: {
+    log() {
+      console.log('Hello world!')
+    }
   }
 }
 </script>
